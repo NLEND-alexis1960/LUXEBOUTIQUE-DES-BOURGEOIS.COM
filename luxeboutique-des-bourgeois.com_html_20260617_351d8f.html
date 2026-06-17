@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LUXEBOUTIQUE des Bourgeois | Luxe, Chaussures, Voitures, Gadgets</title>
+  <meta name="description" content="Chaussures de luxe, voitures d'exception, gadgets high-tech. La sélection de la grande bourgeoisie. Style Pinterest.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #faf7f2; color: #1e1e1e; }
+    h1, h2, h3, .logo, .nav-links a, .hero-title { font-family: 'Playfair Display', serif; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    
+    .site-header { background: #fff; border-bottom: 1px solid #f0ede8; position: sticky; top: 0; z-index: 100; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; flex-wrap: wrap; gap: 16px; }
+    .logo { font-size: 1.8rem; font-weight: 600; background: linear-gradient(135deg, #c9a03d, #8b6b2c); -webkit-background-clip: text; background-clip: text; color: transparent; text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; list-style: none; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; font-weight: 500; color: #2c2c2c; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #b8860b; border-bottom: 2px solid #b8860b; }
+    
+    .hero { background: linear-gradient(135deg, #faf7f2 0%, #fff 100%); padding: 60px 0; text-align: center; }
+    .hero-title { font-size: 3rem; font-weight: 600; margin-bottom: 20px; }
+    .hero-title .luxe { color: #b8860b; }
+    .hero-desc { font-size: 1.1rem; color: #4a4a4a; max-width: 700px; margin: 0 auto 32px; }
+    
+    .section-title { text-align: center; font-size: 2.2rem; margin: 60px 0 16px; }
+    .section-sub { text-align: center; color: #6b6b6b; margin-bottom: 48px; }
+    
+    /* Style Pinterest - grille immersive */
+    .pinterest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 40px 0; }
+    .pin-card { background: white; border-radius: 24px; overflow: hidden; border: 1px solid #efebe5; transition: 0.3s; cursor: pointer; }
+    .pin-card:hover { transform: translateY(-8px); box-shadow: 0 25px 35px -12px rgba(0,0,0,0.15); }
+    .pin-img { width: 100%; aspect-ratio: 1/1.2; object-fit: cover; background: #f2efe8; }
+    .pin-info { padding: 18px; }
+    .pin-brand { font-size: 0.7rem; text-transform: uppercase; color: #b8860b; font-weight: 600; letter-spacing: 1px; }
+    .pin-title { font-weight: 600; font-size: 1rem; margin: 8px 0; }
+    .pin-price { font-weight: 700; font-size: 1.2rem; color: #b8860b; margin: 8px 0; }
+    .btn-pin { display: inline-block; background: #1e1e1e; color: white; padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.8rem; transition: 0.2s; }
+    .btn-pin:hover { background: #b8860b; }
+    .pin-save { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; color: #999; font-size: 0.75rem; cursor: pointer; }
+    .pin-save i { font-size: 1rem; }
+    
+    .category-badge { background: #fff; padding: 8px 20px; border-radius: 40px; display: inline-block; margin-bottom: 20px; font-size: 0.8rem; font-weight: 600; color: #b8860b; border: 1px solid #e2d4c2; }
+    
+    .newsletter { background: #1e1e1e; color: white; padding: 70px 0; text-align: center; margin-top: 60px; }
+    .newsletter h2 { font-size: 2rem; margin-bottom: 12px; }
+    .news-form { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 500px; margin: 30px auto 0; }
+    .news-form input { flex: 2; padding: 14px 20px; border-radius: 60px; border: none; min-width: 200px; }
+    .news-form button { background: #b8860b; border: none; padding: 14px 32px; border-radius: 60px; font-weight: bold; color: white; cursor: pointer; }
+    
+    .footer { background: #111; color: #aaa; padding: 50px 0 30px; }
+    .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+    .footer-col h4 { color: white; margin-bottom: 20px; }
+    .footer-col a { color: #aaa; text-decoration: none; }
+    .footer-col a:hover { color: #b8860b; }
+    .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2a; font-size: 0.8rem; }
+    
+    #popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; }
+    .popup-content { background: #faf7f2; padding: 40px; border-radius: 24px; text-align: center; max-width: 400px; margin: 20px; }
+    .popup-content input { width: 100%; padding: 12px; margin: 15px 0; border-radius: 40px; border: 1px solid #ddd; }
+    .popup-content button { background: #b8860b; color: white; border: none; padding: 12px 30px; border-radius: 40px; cursor: pointer; }
+    .close-popup { margin-top: 15px; display: inline-block; color: #999; text-decoration: none; }
+    
+    @media (max-width: 768px) { .hero-title { font-size: 2rem; } .navbar { flex-direction: column; } .nav-links { justify-content: center; } .pinterest-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <a href="#" class="logo">LUXE<span style="color:#1e1e1e;">BOUTIQUE</span> <span style="font-size:1rem;">des Bourgeois</span></a>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#chaussures">Chaussures</a></li>
+        <li><a href="#voitures">Voitures</a></li>
+        <li><a href="#gadgets">Gadgets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="accueil">
+    <div class="container">
+      <h1 class="hero-title">Luxe, <span class="luxe">Vitesse</span> & <span class="luxe">Innovation</span></h1>
+      <p class="hero-desc">Chaussures d'exception, voitures de prestige et gadgets high-tech. La sélection de la grande bourgeoisie, présentée comme un véritable Pinterest du luxe.</p>
+      <a href="#chaussures" class="btn-pin" style="background:#b8860b;">Découvrir la collection →</a>
+    </div>
+  </section>
+
+  <!-- ================= CHAUSSURES DE LUXE ================= -->
+  <div class="container" id="chaussures">
+    <div style="text-align: center;"><span class="category-badge">👠 ÉDITION LIMITÉE</span></div>
+    <h2 class="section-title">Chaussures de Luxe</h2>
+    <p class="section-sub">Hommes & Femmes – Les plus grandes marques</p>
+    
+    <div class="pinterest-grid">
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Christian+Louboutin" alt="Louboutin"><div class="pin-info"><div class="pin-brand">CHRISTIAN LOUBOUTIN</div><div class="pin-title">Escarpins – Semelle rouge iconique</div><div class="pin-price">695,00 €</div><a href="https://www.amazon.fr/s?k=christian+louboutin+escarpins&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Gucci+Loafers" alt="Gucci"><div class="pin-info"><div class="pin-brand">GUCCI</div><div class="pin-title">Mocassins Jordaan – Boucle GG</div><div class="pin-price">590,00 €</div><a href="https://www.amazon.fr/s?k=gucci+mocassins+jordaan&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Jimmy+Choo" alt="Jimmy Choo"><div class="pin-info"><div class="pin-brand">JIMMY CHOO</div><div class="pin-title">Sandales à strass – Soirée glamour</div><div class="pin-price">725,00 €</div><a href="https://www.amazon.fr/s?k=jimmy+choo+sandales&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Louis+Vuitton+Trainer" alt="LV"><div class="pin-info"><div class="pin-brand">LOUIS VUITTON</div><div class="pin-title">Sneakers Trainer – Cuir blanc</div><div class="pin-price">880,00 €</div><a href="https://www.amazon.fr/s?k=louis+vuitton+trainer&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Hermes+Oran" alt="Hermès"><div class="pin-info"><div class="pin-brand">HERMÈS</div><div class="pin-title">Sandales Oasis – Cuir sable</div><div class="pin-price">650,00 €</div><a href="https://www.amazon.fr/s?k=hermes+sandales+oasis&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Bottega+Veneta" alt="Bottega"><div class="pin-info"><div class="pin-brand">BOTTEGA VENETA</div><div class="pin-title">Lace boots – Intrecciato cuir</div><div class="pin-price">950,00 €</div><a href="https://www.amazon.fr/s?k=bottega+veneta+boots&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+    </div>
+  </div>
+
+  <!-- ================= VOITURES DE LUXE ================= -->
+  <div class="container" id="voitures">
+    <div style="text-align: center;"><span class="category-badge">🏎️ PRESTIGE AUTOMOBILE</span></div>
+    <h2 class="section-title">Voitures de Luxe</h2>
+    <p class="section-sub">Les modèles d'exception – Neuf, occasion & leasing</p>
+    
+    <div class="pinterest-grid">
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Ferrari+SF90" alt="Ferrari"><div class="pin-info"><div class="pin-brand">FERRARI</div><div class="pin-title">Ferrari SF90 Stradale – Hybride 1000ch</div><div class="pin-price">425.000 €</div><a href="https://www.amazon.fr/s?k=ferrari+occasion&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Porsche+911+Turbo" alt="Porsche"><div class="pin-info"><div class="pin-brand">PORSCHE</div><div class="pin-title">911 Turbo S – 650ch, 0-100 en 2.7s</div><div class="pin-price">245.000 €</div><a href="https://www.amazon.fr/s?k=porsche+911+turbo+s&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Lamborghini+Revuelto" alt="Lamborghini"><div class="pin-info"><div class="pin-brand">LAMBORGHINI</div><div class="pin-title">Revuelto – V12 hybride 1015ch</div><div class="pin-price">530.000 €</div><a href="https://www.amazon.fr/s?k=lamborghini+revuelto&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Rolls+Royce+Ghost" alt="Rolls Royce"><div class="pin-info"><div class="pin-brand">ROLLS-ROYCE</div><div class="pin-title">Ghost Extended – Luxe suprême</div><div class="pin-price">350.000 €</div><a href="https://www.amazon.fr/s?k=rolls+royce+ghost&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Bentley+Continental" alt="Bentley"><div class="pin-info"><div class="pin-brand">BENTLEY</div><div class="pin-title">Continental GT Speed – 659ch</div><div class="pin-price">225.000 €</div><a href="https://www.amazon.fr/s?k=bentley+continental+gt&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Mercedes+Classe+S" alt="Mercedes"><div class="pin-info"><div class="pin-brand">MERCEDES-BENZ</div><div class="pin-title">Classe S Maybach – Berline d'exception</div><div class="pin-price">185.000 €</div><a href="https://www.amazon.fr/s?k=mercedes+classe+s+maybach&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir les offres →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+    </div>
+    <p style="text-align:center; font-size:12px; color:#999; margin-top:20px;">* Liens d'affiliation vers les meilleures offres (neuf, leasing, occasion premium).</p>
+  </div>
+
+  <!-- ================= GADGETS HIGH-TECH ================= -->
+  <div class="container" id="gadgets">
+    <div style="text-align: center;"><span class="category-badge">📱 INNOVATION & TECH</span></div>
+    <h2 class="section-title">Gadgets High-Tech</h2>
+    <p class="section-sub">Pour un quotidien connecté et élégant</p>
+    
+    <div class="pinterest-grid">
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=iPhone+16+Pro+Max" alt="iPhone"><div class="pin-info"><div class="pin-brand">APPLE</div><div class="pin-title">iPhone 16 Pro Max – 1 To</div><div class="pin-price">1.699 €</div><a href="https://www.amazon.fr/s?k=iphone+16+pro+max&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Apple+Watch+Ultra" alt="Apple Watch"><div class="pin-info"><div class="pin-brand">APPLE</div><div class="pin-title">Watch Ultra 3 – Titanium</div><div class="pin-price">899 €</div><a href="https://www.amazon.fr/s?k=apple+watch+ultra+3&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=Bose+QuietComfort" alt="Bose"><div class="pin-info"><div class="pin-brand">BOSE</div><div class="pin-title">QuietComfort Ultra – Casque à réduction de bruit</div><div class="pin-price">449 €</div><a href="https://www.amazon.fr/s?k=bose+quietcomfort+ultra&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+      <div class="pin-card"><img class="pin-img" src="https://placehold.co/400x500/e6dfd5/1e1e1e?text=DJI+Drone" alt="DJI"><div class="pin-info"><div class="pin-brand">DJI</div><div class="pin-title">Mavic 4 Pro – Drone 8K</div><div class="pin-price">1.699 €</div><a href="https://www.amazon.fr/s?k=dji+mavic+4+pro&tag=VOTRE_TAG-21" class="btn-pin" target="_blank">Voir sur Amazon →</a><div class="pin-save"><i class="far fa-bookmark"></i> Enregistrer</div></div></div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>✨ Recevez nos sélections exclusives</h2>
+      <p>Chaussures, voitures, gadgets – les meilleures trouvailles du luxe chaque semaine</p>
+      <form class="news-form" onsubmit="event.preventDefault(); subscribeNewsletter(this);">
+        <input type="email" id="sub-email" placeholder="Votre adresse email" required>
+        <button type="submit">Je m'inscris →</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><h4>LUXEBOUTIQUE des Bourgeois</h4><p>Luxe, vitesse et innovation.<br>Partenaires Amazon – Chaussures, voitures, gadgets.</p></div>
+      <div class="footer-col"><h4>Liens utiles</h4><ul><li><a href="#">Mentions légales</a></li><li><a href="#">Politique confidentialité</a></li><li><a href="#">CGU</a></li></ul></div>
+      <div class="footer-col"><h4>Suivez-nous</h4><ul><li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li><li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 LUXEBOUTIQUE des Bourgeois – Tous droits réservés.</p><p style="font-size:11px;">En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.</p></div>
+  </div>
+</footer>
+
+<div id="popup"><div class="popup-content"><h3>✨ Guide exclusif ✨</h3><p>"Les 10 basiques du luxe à moins de 50€"</p><input type="email" id="popup-email" placeholder="Votre email"><button onclick="subscribePopup()">Je télécharge →</button><br><br><a href="#" class="close-popup" onclick="closePopup(); return false;">Fermer</a></div></div>
+
+<script>
+  setTimeout(() => { document.getElementById('popup').style.display = 'flex'; }, 10000);
+  function closePopup() { document.getElementById('popup').style.display = 'none'; }
+  function subscribeNewsletter() { alert('Merci ! Vous recevrez nos sélections luxe chaque semaine.'); closePopup(); }
+  function subscribePopup() { var email = document.getElementById('popup-email').value; if(email) { alert('Merci ! Votre guide va vous être envoyé.'); closePopup(); } }
+</script>
+</body>
+</html>
